@@ -1,0 +1,60 @@
+{
+  "name": "@mukundakatta/agentkit",
+  "version": "0.1.0",
+  "description": "The agent reliability stack: fit, guard, snap, vet, cast. One install for all five sibling libraries (token-aware truncation, network-egress firewall, snapshot tests, tool-arg validation, structured-output enforcer).",
+  "type": "module",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    },
+    "./fit": "@mukundakatta/agentfit",
+    "./guard": "@mukundakatta/agentguard",
+    "./snap": "@mukundakatta/agentsnap",
+    "./vet": "@mukundakatta/agentvet",
+    "./cast": "@mukundakatta/agentcast"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "agent",
+    "llm",
+    "reliability",
+    "agentkit",
+    "agentfit",
+    "agentguard",
+    "agentsnap",
+    "agentvet",
+    "agentcast",
+    "context-window",
+    "firewall",
+    "snapshot",
+    "validation",
+    "structured-output"
+  ],
+  "author": "Mukunda Katta <mukunda.vjcs6@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/MukundaKatta/agentkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MukundaKatta/agentkit.git"
+  },
+  "dependencies": {
+    "@mukundakatta/agentfit": "^0.1.0",
+    "@mukundakatta/agentguard": "^0.1.0",
+    "@mukundakatta/agentsnap": "^0.1.0",
+    "@mukundakatta/agentvet": "^0.1.0",
+    "@mukundakatta/agentcast": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ]
+}
