@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  syntax-check:
+    name: Syntax check (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['18', '20', '22']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # The package re-exports sibling scoped packages that may not be
+      # published yet, so we avoid a full `npm install` + module-resolving
+      # test run here. Instead we validate that every shipped source and
+      # test file parses cleanly under each supported Node version. This is
+      # a fast, dependency-free gate that always reflects real syntax errors.
+      - name: Validate JavaScript syntax
+        run: |
+          for f in $(find src test -name '*.js'); do
+            echo "node --check $f"
+            node --check "$f"
+          done
+
+      - name: Validate package.json is well-formed
+        run: node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json OK')"
